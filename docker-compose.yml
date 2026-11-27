@@ -3,13 +3,13 @@ services:
     image: postgres:16-alpine
     container_name: inventory_db_new
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password123
-      POSTGRES_DB: inventory_service
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password123}
+      POSTGRES_DB: ${POSTGRES_DB:-inventory_service}
     ports:
-      - "5433:5432"  # <--- Changed Host Port to 5433
+      - "${POSTGRES_PORT:-5433}:5432"
     volumes:
-      - postgres_data_new:/var/lib/postgresql/data # <--- New Volume Name
+      - postgres_data_new:/var/lib/postgresql/data
 
 volumes:
-  postgres_data_new: # <--- New Volume Definition
+  postgres_data_new:
